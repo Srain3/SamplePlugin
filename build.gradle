@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.2.20'
+    id 'com.gradleup.shadow' version '9.1.0'
+}
+
+group = 'com.github.suiren_server'
+version = '1.0.0-SNAPSHOT' // ココのバージョンとplugin.ymlは一致させたほうが基本良い(ファイル名に使われる)
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
+}
+
+dependencies {
+    //implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' //←これはshadowJarで含まれるライブラリ依存宣言
+    compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' //←これはshadowJarで含まない(コンパイルするときは参照する)ライブラリ依存宣言
+    compileOnly "io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT"
+}
+
+kotlin {
+    // ここでJavaバージョンを指定中
+    jvmToolchain(24)
+    compileJava {
+        options.release.set(24)
+    }
+}
+
+apply plugin: 'com.gradleup.shadow'
+
+// Gradleを実行する方法(.jarをビルドするには)Tasksの中にあるbuildの中、shadowJarを実行するだけで
+// 一番最初のフォルダー位置にbuildフォルダができて、その中のlibsに完成品-all.jarができてます。
+// 同名だと(同じバージョンだと)中身に変化があれば上書きします。
