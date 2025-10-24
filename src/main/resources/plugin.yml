@@ -1,15 +1,15 @@
 name: Sample # Plugin名
-description: "SuirenServer SamplePlugin" # 説明
+description: "Kotlin製 SamplePlugin" # 説明
 authors: # このリストに制作に関わった人をいれる
   - Srain3
-website: "https://github.com/suiren-server/SamplePlugin" # なるべくgithubのソースリンクを貼る
-main: com.github.suiren_server.sample.Main
+website: "https://github.com/Srain3/SamplePlugin" # なるべくgithubのソースリンクを貼る
+main: com.github.srain3.sample.Main
 version: "1.0.0-SNAPSHOT" # ココのバージョンとbuild.gradleは一致させたほうが基本良い(マイクラ内部に使われる)
-api-version: "1.21.8"
+api-version: "1.21.10"
 
 # 依存プラグイン
 depend:
-  - "Kotlin" # Don't Touch
+  - "Kotlin" # Don't Touch ( https://github.com/Srain3/Kotlin にて配布しているKotlinライブラリに依存します )
 
 # ↓この中に実装するコマンドを登録するための必要情報を書く
 #commands:

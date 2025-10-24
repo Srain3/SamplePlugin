@@ -1,8 +1,6 @@
-@file:Suppress("DEPRECATION")
+package com.github.srain3.sample.util
 
-package com.github.suiren_server.sample.util
-
-import com.github.suiren_server.sample.Main
+import com.github.srain3.sample.Main
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.inventory.ItemFlag
@@ -47,7 +45,7 @@ object Tools {
     val meta = this.itemMeta?:return this
     meta.setDisplayName(displayName?.color())
     meta.lore = lore?.map { it.color() }
-    this.setItemMeta(meta)
+    this.itemMeta = meta
     return this
   }
 
@@ -56,11 +54,14 @@ object Tools {
    * @author Srain3
    */
   fun ItemStack.allHide(): ItemStack {
+    if (!this.hasItemMeta()) return this
+    val meta = this.itemMeta?:return this
     ItemFlag.entries.forEach {
-      if (!this.hasItemFlag(it)) {
-        this.addItemFlags(it)
+      if (!meta.hasItemFlag(it)) {
+        meta.addItemFlags(it)
       }
     }
+    this.itemMeta = meta
     return this
   }
 }

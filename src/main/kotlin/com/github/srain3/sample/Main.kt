@@ -1,4 +1,4 @@
-package com.github.suiren_server.sample
+package com.github.srain3.sample
 
 import org.bukkit.plugin.java.JavaPlugin
 

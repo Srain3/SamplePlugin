@@ -1,23 +1,31 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '2.2.20'
-    id 'com.gradleup.shadow' version '9.1.0'
+    id 'org.jetbrains.kotlin.jvm' version '2.2.21'
+    id 'com.gradleup.shadow' version '9.2.2'
 }
 
-group = 'com.github.suiren_server'
+group = 'com.github.srain3' // ここは所有しているアドレス、あるいはGithubの名前を「com.github."名前"」でリンクの逆順で使用する。要は他と衝突しなければ良い。
 version = '1.0.0-SNAPSHOT' // ココのバージョンとplugin.ymlは一致させたほうが基本良い(ファイル名に使われる)
 
 repositories {
     mavenCentral()
+    // PaperのAPIを使う場合用
     maven {
         name = "papermc"
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
+    // SpigotのAPIを使う場合用
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
 }
 
 dependencies {
-    //implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' //←これはshadowJarで含まれるライブラリ依存宣言
-    compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' //←これはshadowJarで含まない(コンパイルするときは参照する)ライブラリ依存宣言
-    compileOnly "io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT"
+    //implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.2.21' //←これはshadowJarで含まれるライブラリ依存宣言
+    compileOnly 'org.jetbrains.kotlin:kotlin-stdlib:2.2.21' //←これはshadowJarで含まない(コンパイルするときは参照する)ライブラリ依存宣言
+
+    // PaperAPIを使う場合↓有効化(PaperAPIを使う場合、"SpigotAPI"はコメントアウトしてください)
+    //compileOnly "io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT"
+    // SpigotAPIを使う場合↓有効化(SpigotAPIを使う場合、"PaperAPI"はコメントアウトしてください)
+    compileOnly 'org.spigotmc:spigot-api:1.21.10-R0.1-SNAPSHOT'
 }
 
 kotlin {
@@ -30,6 +38,6 @@ kotlin {
 
 apply plugin: 'com.gradleup.shadow'
 
-// Gradleを実行する方法(.jarをビルドするには)Tasksの中にあるbuildの中、shadowJarを実行するだけで
-// 一番最初のフォルダー位置にbuildフォルダができて、その中のlibsに完成品-all.jarができてます。
+// Gradleを実行する方法(.jarをビルドするには)Tasksの中にあるbuildの中、"shadowJar"を実行するだけで
+// フォルダー位置にbuildフォルダができて、その中のlibsに"完成品-all.jar"ができてます。
 // 同名だと(同じバージョンだと)中身に変化があれば上書きします。
