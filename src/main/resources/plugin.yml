@@ -2,10 +2,10 @@ name: Sample # Plugin名
 description: "Kotlin製 SamplePlugin" # 説明
 authors: # このリストに制作に関わった人をいれる
   - Srain3
-website: "https://github.com/Srain3/SamplePlugin" # なるべくgithubのソースリンクを貼る
+website: "https://github.com/Srain3/SamplePlugin" # githubのソースリンクか、配布サイトのリンク
 main: com.github.srain3.sample.Main
-version: "1.0.0-SNAPSHOT" # ココのバージョンとbuild.gradleは一致させたほうが基本良い(マイクラ内部に使われる)
-api-version: "1.21.11"
+version: "${version}"
+api-version: "26.3"
 
 # 依存プラグイン
 depend:
